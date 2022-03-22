@@ -20,11 +20,11 @@ def pytest_addoption(parser):
 # Запуск браузера(для каждой функции)
 @pytest.fixture(scope="function")  # запускается для каждой функции
 def browser(request):
-    language = request.config.getoption('language')
-    options = Options()
-    options.add_experimental_option('prefs', {'intl.accept_languages': language})
-    browser = webdriver.Chrome(options=options)  # До тестов
+    language = request.config.getoption('language')                                     #
+    options = Options()                                                                 # До тестов
+    options.add_experimental_option('prefs', {'intl.accept_languages': language})       #
+    browser = webdriver.Chrome(options=options)                                         #
     yield browser
-    browser.quit()  # После тестов
+    browser.quit()                                                                      # После тестов
 
 #   Добавить запуски тестов с FireFox

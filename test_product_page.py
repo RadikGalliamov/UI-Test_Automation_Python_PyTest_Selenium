@@ -1,8 +1,7 @@
-# Тест-кейсы страницы продукта
+# Тест-кейсы страницы товара
 import pytest
 
-from .pages.product_page import ProductPage  # # импортируем проверки для страницы продукта
-from .pages.login_page import LoginPage  # импортируем проверки для страницы логина/регистрации
+from pages.product_page import ProductPage
 
 link_product_page = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
 link_product_promo = "http://selenium1py.pythonanywhere.com/ru/catalogue/the-shellcoders-handbook_209/?promo=newYear"

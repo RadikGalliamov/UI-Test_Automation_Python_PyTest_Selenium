@@ -24,7 +24,7 @@ class MainPage(BasePage):
         #  alert.accept()
         # return LoginPage(browser=self.browser, url=self.browser.current_url)
 
-    # Метод проверки ссылки на вхождение слова login
+    # Метод проверки ссылки на логин
     def should_be_login_link(self):
         # Локатор берем из базы с локаторами locators.py *-означает что берем пару значений (кортеж)
         assert self.is_element_present(*MainPageLocators.LOGIN_LINK), "Login link is not presented"

@@ -1,8 +1,8 @@
 # Тест-кейсы основной страницы
 
 
-from .pages.main_page import MainPage  # импортируем проверки для главной страницы
-from .pages.login_page import LoginPage  # импортируем проверки для страницы логина/регистрации
+from pages.main_page import MainPage
+from pages.login_page import LoginPage
 
 link = "http://selenium1py.pythonanywhere.com/"
 link_login_page = "http://selenium1py.pythonanywhere.com/ru/accounts/login/"
