@@ -1,8 +1,9 @@
 # Тест-кейсы страницы товара
+import time
 import pytest
-
 from pages.locators import ProductPageLocators
 from pages.product_page import ProductPage
+from pages.basket_page import BasketPage
 
 link_209 = "http://selenium1py.pythonanywhere.com/ru/catalogue/the-shellcoders-handbook_209"
 link_product_page = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
@@ -72,6 +73,7 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
         "Сообщение об успехе появилось, но не должно было появиться"
 
 
+@pytest.mark.skip
 # есть ли ссылка на страницу логина
 def test_guest_should_see_login_link_on_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
@@ -80,6 +82,7 @@ def test_guest_should_see_login_link_on_product_page(browser):
     page.should_be_login_link()
 
 
+@pytest.mark.skip
 # можно ли перейти на страницу логина из страницы продукта
 def test_guest_can_go_to_login_page_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
@@ -88,18 +91,28 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     page.go_to_login_page()
 
 
-"""
-@pytest.mark.need_review
-# создать метод
-def test_guest_cant_see_product_in_basket_opened_from_product_page()
+# переходим на страницу корзины из главной страницы, ожидаем сообщение о пустой корзине, под гостем
+def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/ru/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.go_to_basket()  # клик по кнопке корзина для перехода на страницу корзины
+    time.sleep(2)
+    basket_page = BasketPage(browser, browser.current_url)  # переход на страницу корзины
+    time.sleep(2)
+    basket_page.should_be_basket_is_empty()
+    time.sleep(2)
 
-@pytest.mark.need_review
-# создать метод
-def test_guest_can_go_to_login_page_from_product_page()
 
-@pytest.mark.need_review
-# создать метод
-def test_user_can_add_product_to_basket()
-    
-    
-"""
+# переходим на страницу корзины из страницы продукта, ожидаем сообщение о пустой корзине, под гостем
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/ru/catalogue/the-shellcoders-handbook_209"
+    page = ProductPage(browser, link)
+    page.open()
+    time.sleep(2)
+    page.go_to_basket()
+    time.sleep(2)
+    basket_page = BasketPage(browser, browser.current_url)  # переход на страницу корзины
+    time.sleep(2)
+    basket_page.should_be_basket_is_empty()
+    time.sleep(2)

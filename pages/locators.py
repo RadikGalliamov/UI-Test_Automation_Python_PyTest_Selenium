@@ -7,7 +7,6 @@ from selenium.webdriver.common.by import By
 # class MainPageLocators:
 
 
-
 class LoginPageLocators:
     LOGIN_FORM_USERNAME = (By.CSS_SELECTOR, "#id_login-username")
     LOGIN_FORM_PASSWORD = (By.CSS_SELECTOR, "#id_login-password")
@@ -35,3 +34,8 @@ class ProductPageLocators:
 class BasePageLocators:
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     # LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc") не рабочий селектор
+    BASKET_BTN = (By.CSS_SELECTOR, 'a[href*="/basket/"]')
+
+
+class BasketPageLocators:
+    BASKET_IS_EMPTY_TEXT = (By.XPATH, '//div[@id="content_inner"]/p[contains(text(), "Ваша корзина пуста")]')
