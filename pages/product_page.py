@@ -54,6 +54,11 @@ class ProductPage(BasePage):
         WebDriverWait(driver=self.browser, timeout=20).until(
             EC.presence_of_element_located(ProductPageLocators.INNER_ALERTS))
 
+    # метод сообщение об успешном добавлении в корзину появляется
+    def should_not_be_success_message(self):
+        assert not self.is_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Ошибка сообщение о успешном добавлении продукта в корзину"
+
 
 """  
     # Старый код

@@ -3,11 +3,13 @@
 
 
 import math
-from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.common.exceptions import NoAlertPresentException
+from selenium.webdriver.support.wait import WebDriverWait
+from .locators import BasePageLocators
 
 
-# Классы позволяют создавать свои собственные типы данных и методы
 class BasePage:
     # __init__ - базовая функция-конструктор для класса BasePage,
     # позволяет создавать методы класса BasePage
@@ -34,13 +36,32 @@ class BasePage:
     # self.browser.implicitly_wait(timeout)
 
     # метод is_element_present, в котором будем перехватывать исключение.
-    # В него будем передавать два аргумента: как искать (css, id, xpath и тд) и собственно что искать (строку-селектор).
+    # В него будем передавать два аргумента: как искать (css, id, xpath и тд) и что искать (строку-селектор).
     # Чтобы перехватывать исключение, нужна конструкция try/except:
     def is_element_present(self, how, what):
         try:
             self.browser.find_element(how, what)
         except NoSuchElementException:
+            return False  # элемент не появился
+        return True  # элемент появился
+
+    # метод - элемент не появился
+    def is_not_element_present(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return True  # элемент не появился
+
+        return False  # элемент появился
+
+    # метод - элемент исчезает
+    def is_disappeared(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout, 1, TimeoutException). \
+                until_not(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
             return False
+
         return True
 
     # Метод для решения задачи в модальном окне
@@ -58,3 +79,11 @@ class BasePage:
         except NoAlertPresentException:
             print("No second alert presented")
 
+    # гость может перейти на страницу логина со страницы Х
+    def go_to_login_page(self):
+        login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
+        login_link.click()
+
+    # есть ли ссылка на страницу логина
+    def should_be_login_link(self):
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"

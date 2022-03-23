@@ -1,4 +1,7 @@
 # Page Object для страницы логина/регистрации
+
+# Сократить код в методах, разбить на мелкие методы
+
 import random
 from .base_page import BasePage
 from .locators import LoginPageLocators
@@ -8,10 +11,10 @@ from .locators import LoginPageLocators
 # LoginPage наследует методы базового класса (BasePage)
 # В self нах-ся объект - страница логином/регистрацией
 class LoginPage(BasePage):
-    def should_be_login_page(self):
-        self.should_be_login_url()
-        self.should_be_login_form()
-        self.should_be_register_form()
+    def should_be_login_page(self):  # Это нужно?
+        self.should_be_login_url()  #
+        self.should_be_login_form()  #
+        self.should_be_register_form()  #
 
     # Метод проверки на корректный url адрес (подстрока "login" есть в текущем url браузере)
     def should_be_login_url(self):
