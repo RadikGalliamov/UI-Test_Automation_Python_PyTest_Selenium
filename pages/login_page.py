@@ -11,7 +11,7 @@ from .locators import LoginPageLocators
 # LoginPage наследует методы базового класса (BasePage)
 # В self нах-ся объект - страница логином/регистрацией
 class LoginPage(BasePage):
-    def should_be_login_page(self):  # Это нужно?
+    def should_be_login_page(self):  #
         self.should_be_login_url()  #
         self.should_be_login_form()  #
         self.should_be_register_form()  #
@@ -48,3 +48,10 @@ class LoginPage(BasePage):
         regist_welcome_text = self.browser.find_element(*LoginPageLocators.REGIST_WELCOME_TEXT)
         regist_welcome_text = regist_welcome_text.text
         assert "Спасибо за регистрацию!" == regist_welcome_text, 'Ошибка тестирования формы регистрации'
+
+    # метод принимает две строки и регистрирует пользователя
+    def register_new_user(self, email, password):
+        self.browser.find_element(*LoginPageLocators.REGIST_FORM_EMAIL).send_keys(email)
+        self.browser.find_element(*LoginPageLocators.REGIST_FORM_PASSWORD1).send_keys(password)
+        self.browser.find_element(*LoginPageLocators.REGIST_FORM_PASSWORD2).send_keys(password)
+        self.browser.find_element(*LoginPageLocators.REGIST_FORM_BUTTON).click()
