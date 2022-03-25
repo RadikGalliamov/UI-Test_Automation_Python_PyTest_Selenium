@@ -3,7 +3,15 @@
 from selenium.webdriver.common.by import By
 
 
+class BasePageLocators:
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    BASKET_BTN = (By.CSS_SELECTOR, 'a[href*="/basket/"]')
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
+
+
 class LoginPageLocators:
+    LOGIN_FORM = (By.CSS_SELECTOR, "form#login_form")
+    REGISTER_FORM = (By.CSS_SELECTOR, "form#register_form")
     LOGIN_FORM_USERNAME = (By.CSS_SELECTOR, "#id_login-username")
     LOGIN_FORM_PASSWORD = (By.CSS_SELECTOR, "#id_login-password")
     LOGIN_FORM_BUTTON = (By.CSS_SELECTOR, "button[name=login_submit]")
@@ -24,12 +32,6 @@ class ProductPageLocators:
     PRICE_IN_BASKET = (By.CSS_SELECTOR, "div#messages :nth-child(3) div.alertinner :nth-child(1) :nth-child(1)")
     PRICE_IN_TOP = (By.CSS_SELECTOR, "div.basket-mini")
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, "div.alertinner")
-
-
-class BasePageLocators:
-    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
-    BASKET_BTN = (By.CSS_SELECTOR, 'a[href*="/basket/"]')
-    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
 
 
 class BasketPageLocators:

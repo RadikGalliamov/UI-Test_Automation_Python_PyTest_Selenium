@@ -44,17 +44,17 @@ def test_user_should_be_login_form(browser):
     page.should_be_login_form()  # выполняем метод - проверки формы логина
 
 
+# Параметризуем тесты меткой login_guest
 @pytest.mark.login_guest
 class TestLoginFromMainPage:
-    # не забываем передать первым аргументом self
-    # гость может перейти на страницу логина
+    # Гость может перейти на страницу логина
     def test_guest_can_go_to_login_page(self, browser):
         page = MainPage(browser, MAIN_PAGE)
         page.open()
         page.go_to_login_page()
         LoginPage(browser, browser.current_url)
 
-    # гость видит кнопку перехода на страницу логина
+    # Гость видит кнопку перехода на страницу логина
     def test_guest_should_see_login_link(self, browser):
         page = MainPage(browser, MAIN_PAGE)
         page.open()
