@@ -1,5 +1,5 @@
 # Базовый класс от которого будут наследоваться другие классы
-# Базовые методы работы со страницами
+# Базовые методы работы для любой страницы
 
 import math
 from selenium.webdriver.support import expected_conditions as EC

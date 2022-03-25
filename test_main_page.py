@@ -44,7 +44,6 @@ def test_user_should_be_login_form(browser):
     page.should_be_login_form()  # выполняем метод - проверки формы логина
 
 
-# Параметризуем тесты меткой login_guest
 @pytest.mark.login_guest
 class TestLoginFromMainPage:
     # Гость может перейти на страницу логина
